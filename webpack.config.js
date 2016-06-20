@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 module.exports = {
   context: __dirname + '/app',
   entry: './index.js',
@@ -15,6 +16,13 @@ module.exports = {
   	  }
   	]
   },
+  plugins:[
+    new webpack.optimize.UglifyJsPlugin({
+      compress:{
+        warnings:true
+      }
+    })
+  ],
   watch: true,
   //devtool: "sourse-map"
 };
