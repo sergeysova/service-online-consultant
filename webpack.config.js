@@ -16,13 +16,13 @@ module.exports = {
   	  }
   	]
   },
-  plugins:[
+  /*plugins:[
     new webpack.optimize.UglifyJsPlugin({
       compress:{
         warnings:true
       }
     })
-  ],
+  ],*/
   watch: true,
   //devtool: "sourse-map"
 };

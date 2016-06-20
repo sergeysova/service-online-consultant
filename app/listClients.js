@@ -34,53 +34,50 @@ export default class ListClients extends Component {
   constructor(props){
     super();
 
-    this.state = {users: props.users[0].users, row: []};
+    this.state = {users: props.users[0].users, rev: false};
   }
-  filter123(o){
-    console.log(o);
-    let result = o.sort((a,b)=>{
-        if (Number(a) > Number(b)) return 1;
-        if (Number(a) < Number(b)) return -1;
-    });
-    return result;
-  }
-  filter(o,row,typeFilter){
-    let rows = [];
-    let buf = [];
-    for(let x in o){
-      buf[x] = o[x][row];
-    }
-    console.log(typeFilter);
+  filter(users,row,typeFilter){
     if(typeFilter == '123'){
-      buf = this.filter123(buf);
+      users.sort((a,b)=>{
+        return a[row] - b[row];
+      });
     }
-    else{
-      buf = buf.sort();
-    }
-    console.log(buf);
-    for(let y=0; y < buf.length; y++){
-      for(let x=0; x < o.length; x++){
-        if(buf[y] == o[x][row]){
-          console.log(o);
-          rows.push(o[x]);
-          break;
+    else if('ABC'){
+      users.sort((a,b)=>{
+        if (a[row] > b[row]) {
+          return 1;
         }
-      }
-
+        if (a[row] < b[row]) {
+          return -1;
+        }
+        return 0;
+      });
     }
-    return rows;
+
+    let rev = this.state.rev;
+    if(rev){
+      users.reverse();
+      this.setState({
+        rev: false
+      })
+    }else{
+      this.setState({
+        rev: true
+      })
+    }
+    return users;
   }
   handleFilterRow123(row) {
-    let o = this.state.users;
-    let result = this.filter(o,row,'123');
+    let users = this.state.users;
+    let result = this.filter(users,row,'123');
     this.setState({
       users: result
     })
 
   }
   handleFilterRowABC(row) {
-    let o = this.state.users;
-    let result = this.filter(o,row,'ABC');
+    let users = this.state.users;
+    let result = this.filter(users,row,'ABC');
     this.setState({
       users: result
     })

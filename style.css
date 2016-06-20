@@ -16,5 +16,6 @@ td{
 	border: solid 1px;
 }
 td.td-head {
+	cursor: pointer;
     background-color: #93dab2;
 }
