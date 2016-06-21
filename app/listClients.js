@@ -34,7 +34,7 @@ export default class ListClients extends Component {
   constructor(props){
     super();
 
-    this.state = {users: props.users[0].users, rev: false};
+    this.state = {users: props.users[0].users, reverse: false};
   }
   filter(users,row,typeFilter){
     if(typeFilter == '123'){
@@ -53,18 +53,9 @@ export default class ListClients extends Component {
         return 0;
       });
     }
-
-    let rev = this.state.rev;
-    if(rev){
-      users.reverse();
-      this.setState({
-        rev: false
-      })
-    }else{
-      this.setState({
-        rev: true
-      })
-    }
+    this.setState({
+      reverse: !this.state.reverse,
+    });
     return users;
   }
   handleFilterRow123(row) {
@@ -73,7 +64,6 @@ export default class ListClients extends Component {
     this.setState({
       users: result
     })
-
   }
   handleFilterRowABC(row) {
     let users = this.state.users;
@@ -81,15 +71,15 @@ export default class ListClients extends Component {
     this.setState({
       users: result
     })
-
+  }
+  renderUsers(){
+    let list = this.state.users;
+    if (this.state.reverse) {
+      list.reverse();
+    }
+    return list.map( (user, index)=> <UserCol user={user} key={index} /> )
   }
   render() {
-    let rows = [];
-    let lastUser = null;
-    let list = this.state.users;
-    for(let x in list ){
-    rows.push(<UserCol user={list[x]} key={x} />);
-    }
     return(
       <table>
       <tbody>
@@ -107,7 +97,7 @@ export default class ListClients extends Component {
           <td className="td-head" onClick={this.handleFilterRow123.bind(this,'times')} >Время</td>
           <td className="td-head" onClick={this.handleFilterRow123.bind(this,'title')} >Микр</td>
         </tr>
-        {rows}
+        {this.renderUsers()}
       </tbody>
       </table>
     );
