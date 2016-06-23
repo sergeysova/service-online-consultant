@@ -9,6 +9,8 @@ om_intervalOP
 
 om_connect();
 
+const listeners = [];
+
 function om_connect() {
 	let port=443;
 	let om_serhost="148.251.82.26";
@@ -49,7 +51,7 @@ let Xtest=0;
 		
 		console.log('init.js om_ws.onmessage '+(Xtest++));
 		console.log(e);
-		myfunc(e);
+		listeners.map(callback => callback(e));
 /*
 		var mo=JSON.parse(e.data)
            
@@ -227,8 +229,8 @@ function createXPathFromElement1(elm) {
     return segs.length ? '/' + segs.join('/') : null; 
 };
 let Ytest=0;
-export default function myfunc(e,callback){
-	//return(e);
-	console.log("Myfunc"+(Ytest++))
-	console.log(e);
+
+
+export default function onMessage(callback){
+  listeners.push(callback);
 }
