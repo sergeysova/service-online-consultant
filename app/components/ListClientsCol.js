@@ -1,35 +1,10 @@
 import React, { Component } from "react";
-/*
-class UserRow extends Component {
-  render(){
-    return (<tr></tr>)
-  }
-}
-*/
+import referrer_keyword_parser from "../myTools";
 
-class UserCol extends Component {
-  render(){
-    let el = this.props.user;
-    return (
-      <tr>
-      <td>{el.status} </td>
-      <td>{el.username} </td>
-      <td>{el.ip} </td>
-      <td>{el.city} </td>
-      <td>{el.title} </td>
-      <td>{el.sreferer} </td>
-      <td>{el.sreferer} </td>
-      <td>{el.brouser} </td>
-      <td>{el.parakey} </td>
-      <td>{el.dopinfo} </td>
-      <td>{el.times} </td>
-      <td>0</td>
-      </tr>
-    )
-  }
-}
+import ListClientsRow from "./ListClientsRow";
 
-export default class ListClients extends Component {
+
+export default class ListClientsCol extends Component {
   
   constructor(props){
     super();
@@ -77,7 +52,7 @@ export default class ListClients extends Component {
     if (this.state.reverse) {
       list.reverse();
     }
-    return list.map( (user, index)=> <UserCol user={user} key={index} /> )
+    return list.map( (user, index)=> <ListClientsRow user={user} key={index} /> )
   }
   render() {
     return(

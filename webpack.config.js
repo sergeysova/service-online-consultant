@@ -15,14 +15,14 @@ module.exports = {
   	  	query:{ presets: ['react', 'es2015'] }
   	  }
   	]
-  },
+  },/*
   plugins:[
     new webpack.optimize.UglifyJsPlugin({
       compress:{
         warnings:true
       }
     })
-  ],
+  ],*/
   watch: true,
   //devtool: "sourse-map"
 };
